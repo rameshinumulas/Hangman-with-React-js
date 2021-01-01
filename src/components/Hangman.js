@@ -140,9 +140,9 @@ export default class Hangman extends Component {
         console.log(this.state.guessed,"guessed letters ")
 
         return (
-            <div  className="Hangman container">
-                    <h3 className="float-right">Wrong Guesses:{this.state.mistakes} of {this.state.maxWrong}</h3><br /><br />
-                    <div className="float-xl-right">
+            <div  className="Hangman">
+                
+                    <h3 className="float-xl-right">Wrong Guesses:{this.state.mistakes} of {this.state.maxWrong}</h3><br /><br />
                         {this.state.disabled ?
                         <select class="custom-select" style={{width:200}} onChange={this.LevelChange}>
                         <option value="easy" selected>Easy</option>
@@ -155,18 +155,19 @@ export default class Hangman extends Component {
                         <option value="medium" disabled>meduim</option>
                         <option value="hard" disabled>Hard</option>
                         </select>}
-                    </div>
-                    <div className="text-center">
+                    <p className="text-center">
+                    {!Gamecomplete ? this.guessedWord() : this.state.Answer}
+                    </p>
+                   
+                    <div className="hangman_images" style={{display:"flex"}}>
                         {rightGuessing ?  '' :
                         <img src={this.state.images[this.state.mistakes]} alt ="hangman" style={{width:350,height:300}}/>
                         }
+                    <p className=" container start_game">
+                    {startGame}
+                    </p>
                     </div>
-                  
-                
                     <div className="text-center">
-                        <p>
-                            {!Gamecomplete ? this.guessedWord() : this.state.Answer}
-                        </p>
                         { this.state.mistakes >= this.state.maxWrong || rightGuessing ? 
                         <div>hello my dear friend<br/> 
                             <h3> The secrete word is
@@ -175,12 +176,12 @@ export default class Hangman extends Component {
                         </div>
                         :<button className='btn btn-danger' onClick={this.HintOFtheWord}>you can use hint option</button>
                         }
-                        <p>
-                            {startGame}
-                        </p>
-                        <button className='btn btn-danger' onClick={this.PlayAgain}>Restart</button>
-                        
+                        <button className='btn btn-danger' onClick={this.PlayAgain}>Restart</button>  
                     </div>
+                 
+                  
+                
+                
             </div>
         )
     }
